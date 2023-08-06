@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   # フォローをした、されたの関係
   has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :followess, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
   # 一覧画面で使う
   has_many :following_users, through: :followers, source: :followed
@@ -29,4 +29,19 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [100, 100]).processed
    end
+
+ #　フォローしたときの処理
+ def follow(user_id)
+  followers.create(followed_id: user_id)
+ end
+
+#　フォローを外すときの処理
+ def unfollow(user_id)
+  followers.find_by(followed_id: user_id).destroy
+ end
+
+#フォローしていればtrueを返す
+ def following?(user)
+  following_users.include?(user)
+ end
 end
