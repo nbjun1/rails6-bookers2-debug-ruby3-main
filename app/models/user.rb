@@ -8,16 +8,14 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
 
-  has_many :users, class_name: "relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :@user.follow, through: :users, source: :relationships
-  has_many :users, class_name: "relationship", foreign_key: "followed_id", dependent: :destroy
-  has_many :@user.follow, through: :users, source: :relationships
+  # フォローをした、されたの関係
+  has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followess, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
-  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  # 一覧画面で使う
+  has_many :following_users, through: :followers, source: :followed
+  has_many :follower_users, through: :followeds, source: :follower
 
-  has_many :following, through: :active_relationships, source: :followed
-  has_many :followers, through: :passive_relationships, source: :follower
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true, presence:true
