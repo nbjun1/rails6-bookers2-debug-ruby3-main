@@ -46,7 +46,7 @@
   <% @book.book_comments.each do |book_comment| %>
     <p>
       <%= image_tag book_comment.user.get_profile_image, size: "100x100" %>
-      <span><%= book_comment.user.name %></span>
+      <%= book_comment.user.name %>
       <%= book_comment.comment %>
       <% if book_comment.user == current_user %>
         <%= link_to 'Destroy', book_book_comment_path(@book, book_comment), method: :delete, class: "btn btn-sm btn-danger" %>
@@ -56,8 +56,8 @@
 </div>
 
       <div>
-        <%= form_with model: [@book, @book_comment] do |f| %>
-         <%= f.text_area :comment, rows: '5', class: "custom-textarea" %>
+        <%= form_with model: [@book, @book_comment], local: true do |f| %>
+         <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "w-100" %>
          <p><%= f.submit "送信" %></p>
         <% end %>
       </div>
