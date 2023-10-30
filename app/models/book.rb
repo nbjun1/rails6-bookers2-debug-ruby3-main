@@ -9,6 +9,13 @@ class Book < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+  # いいねの合計カウント数が多い順に投稿を取得するスコープ
+  scope :sorted_by_favorites_count, -> {
+    left_joins(:favorites)
+      .group(:id)
+      .order('COUNT(favorites.id) DESC')
+  }
+
   def self.looks(search, word)
     if search == "perfect_match"
       @book = Book.where("title LIKE?","#{word}")
