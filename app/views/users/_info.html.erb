@@ -41,7 +41,9 @@
       <% end %>
     </td>
     <td>
-      <%= link_to "DM", messages_path(user.id) %>
+      <% if current_user.following?(@user) %>
+        <%= link_to "DM", messages_path(user.id) %>
+      <% end %>
     </td>
   </tr>
 </table>
