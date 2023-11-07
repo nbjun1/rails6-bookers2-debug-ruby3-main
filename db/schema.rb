@@ -65,9 +65,12 @@ ActiveRecord::Schema.define(version: 2023_11_01_142141) do
 
   create_table "messages", force: :cascade do |t|
     t.text "message"
-    t.integer "user_id"
+    t.integer "sender_id"
+    t.integer "receiver_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -93,4 +96,6 @@ ActiveRecord::Schema.define(version: 2023_11_01_142141) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "messages", "receivers"
+  add_foreign_key "messages", "senders"
 end
