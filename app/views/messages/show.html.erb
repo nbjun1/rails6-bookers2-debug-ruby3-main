@@ -1,10 +1,14 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
-    <div class='col-md-3'>
-      <h2>
-        <%= @recipient.name %>とのメッセージ
-      </h2>
-
+    <div class='col-md-4'>
+      <%= render 'messages/new', message: @message %>
     </div>
+
+    <div class='col-md-8'>
+      <h2>
+        <%= @reciver.name %>とのダイレクトメッセージ
+      </h2>
+    </div>
+
   </div>
 </div>
