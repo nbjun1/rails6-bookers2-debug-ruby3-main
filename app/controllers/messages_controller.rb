@@ -6,8 +6,8 @@ class MessagesController < ApplicationController
   end
 
   def show
-    @recipient = User.find(params[:id])
-    @messages = current_user.messages_between(@recipient)
+    @reciver = User.find(params[:id])
+    #@messages = current_user.messages_between(@reciver)
   end
 
   def create
