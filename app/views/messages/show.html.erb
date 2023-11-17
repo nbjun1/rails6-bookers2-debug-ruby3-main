@@ -6,9 +6,12 @@
 
     <div class='col-md-8'>
       <h2>
-        <%= @reciver.name %>とのダイレクトメッセージ
+        <%= @receiver.name %>とのダイレクトメッセージ
       </h2>
+      <% @message.each do |msg| %>
+        <p><%= msg.sender.name %>: <%= msg.message %></p>
+      <% end %>
     </div>
-
   </div>
 </div>
+
