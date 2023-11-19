@@ -9,12 +9,12 @@ class MessagesController < ApplicationController
   def show
     @received_messages = current_user.received_messages
     @sent_messages = current_user.sent_messages
-
+    @message = Message.find(params[:id])
   end
 
   def create
-    @message = current_user.sent_messages.build(message_params)
-    @message.save
+    @newmessage = current_user.sent_messages.build(message_params)
+    @newmessage.save
     redirect_to messages_path
   end
 
