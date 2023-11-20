@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
   before_action :set_message, only: [:show]
 
   def index
-    @users = User.all
+    @received_messages = current_user.received_messages.includes(:sender)
+    @sent_messages = current_user.sent_messages.includes(:receiver)
   end
 
   def show

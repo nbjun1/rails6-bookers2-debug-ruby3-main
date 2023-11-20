@@ -1,0 +1,20 @@
+<h2>ダイレクトメッセージ一覧</h2>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @received_messages.each do |message| %>
+     <% user = message.sender %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= message.message %></td>
+          <td><%= link_to "詳細", message_path(message) %></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
