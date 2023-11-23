@@ -41,9 +41,9 @@
       <% end %>
     </td>
     <td>
-      <% if current_user.following?(@user) %>
+      <% if current_user.following?(user) %>
         <%= link_to "DM", message_path(user.id) %>
-      <% elsif current_user == @user %>
+      <% elsif current_user == user %>
         <%= link_to "DM", messages_path %>
       <% end %>
     </td>
