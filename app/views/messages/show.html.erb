@@ -1,14 +1,17 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     <div class='col-md-4'>
-      <%= render 'messages/new', message: @message %>
+      <%= render 'messages/new', message: @newmessage %>
     </div>
 
     <div class='col-md-8'>
       <h2>
-        <%= @reciver.name %>とのダイレクトメッセージ
+        <%= @receiver.name %>とのダイレクトメッセージ
       </h2>
+      <% @message.each do |msg| %>
+        <p><%= msg.sender.name %>: <%= msg.message %></p>
+      <% end %>
     </div>
-
   </div>
 </div>
+
