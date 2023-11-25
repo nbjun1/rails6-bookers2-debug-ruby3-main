@@ -10,11 +10,8 @@ class MessagesController < ApplicationController
   def show
     @received_messages = current_user.received_messages
     @sent_messages = current_user.sent_messages
-    @message = current_user.messages.find_by(id: params[:id])
+    @message = Message.new
 
-    # @messageが存在しなくてもエラーを発生させないように修正
-    # 代わりにメッセージが存在しない場合は新しいメッセージを作成
-    @message ||= current_user.sent_messages.build(receiver_id: params[:id])
   end
 
   def create
