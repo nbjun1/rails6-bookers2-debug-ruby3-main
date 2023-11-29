@@ -4,17 +4,19 @@
     <tr>
       <th>Image</th>
       <th>name</th>
-      <th></th>
+      <th>Message</th>
+      <th>詳細</th>
     </tr>
   </thead>
   <tbody>
-    <% @messages.reciver_id.each do |message| %>
-     <% user = message.sender %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= message.message %></td>
-          <td><%= link_to "詳細", message_path(message) %></td>
-        </tr>
-      <% end %>
+    <% @received_messages.each do |message| %>
+      <% sender = message.sender %>
+      <tr>
+        <td><%= image_tag sender.image_url, alt: sender.name, class: 'avatar' %></td>
+        <td><%= sender.name %></td>
+        <td><%= message.message %></td>
+        <td><%= link_to "詳細", message_path(message) %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
