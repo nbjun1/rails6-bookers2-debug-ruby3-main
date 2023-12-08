@@ -11,7 +11,6 @@ class MessagesController < ApplicationController
     @received_messages = current_user.received_messages
     @sent_messages = current_user.sent_messages
     @message = Message.new
-
   end
 
   def create
@@ -23,7 +22,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:message, :receiver_id)
+    params.require(:message).permit(:message, :receiver_id, :sender_id)
   end
 
   def set_message
