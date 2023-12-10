@@ -10,7 +10,8 @@ class MessagesController < ApplicationController
   def show
     @received_messages = current_user.received_messages
     @sent_messages = current_user.sent_messages
-    @message = Message.new
+    @receiver = @message.sender  # または @message.receiver に応じて
+    @new_message = Message.new
   end
 
   def create

@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   # メッセージ(DM)関連の記述
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
-  has_many :received_messages, class_name: 'Message', foreign_key: 'reciver_id'
+  has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'
 
   # フォローをした、されたの関係
   has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
