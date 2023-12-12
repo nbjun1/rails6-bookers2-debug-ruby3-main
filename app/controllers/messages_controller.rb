@@ -28,5 +28,11 @@ class MessagesController < ApplicationController
 
   def set_message
     @message = Message.find_by(id: params[:id])
+
+  # メッセージが見つからない場合のエラーハンドリング
+    if @message.nil?
+      flash[:alert] = "メッセージが見つかりません。"
+      redirect_to messages_path
+    end
   end
 end
