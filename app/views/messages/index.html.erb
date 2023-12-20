@@ -5,7 +5,6 @@
       <th>Image</th>
       <th>Name</th>
       <th>Message</th>
-      <th>詳細</th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +14,6 @@
         <td><%= image_tag sender.image_url, alt: sender.name, class: 'avatar' %></td>
         <td><%= sender.name %></td>
         <td><%= message.message %></td>
-        <td><%= link_to "詳細", message_path(message) %></td>
       </tr>
     <% end %>
   </tbody>
