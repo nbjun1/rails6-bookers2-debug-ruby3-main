@@ -1,10 +1,6 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
-    <div class='col-md-4'>
-      <%= render 'messages/new', message: @newmessage %>
-    </div>
-
-    <div class='col-md-8'>
+    <div class='col' style='height: 400px; overflow-y: scroll;'>
       <h2>
         <%= @receiver.name %>とのダイレクトメッセージ
       </h2>
@@ -13,5 +9,14 @@
       <% end %>
     </div>
   </div>
-</div>
 
+  <div class='row'>
+    <div class='col'>
+      <%= form_with(model: @new_message, url: messages_path, method: :post) do |form| %>
+       <%= form.text_area :message, placeholder: "メッセージを入力..." %>
+       <%= form.hidden_field :receiver_id, value: @receiver.id %>
+       <%= form.submit "送信", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -41,10 +41,10 @@
       <% end %>
     </td>
     <td>
-      <% if current_user.following?(user) %>
-        <%= link_to "DM", message_path(user.id) %>
+      <% if current_user != user && current_user.following?(user) %>
+        <%= link_to "DM", message_path(user) %>
       <% elsif current_user == user %>
-        <%= link_to "DM", messages_path %>
+        <%= link_to "dm", messages_path %>
       <% end %>
     </td>
   </tr>

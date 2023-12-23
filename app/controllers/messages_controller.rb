@@ -10,11 +10,8 @@ class MessagesController < ApplicationController
   def show
     @received_messages = current_user.received_messages
     @sent_messages = current_user.sent_messages
-    @message = current_user.messages.find_by(id: params[:id])
-
-    # @messageが存在しなくてもエラーを発生させないように修正
-    # 代わりにメッセージが存在しない場合は新しいメッセージを作成
-    @message ||= current_user.sent_messages.build(receiver_id: params[:id])
+    @receiver = @message.sender  # または @message.receiver に応じて
+    @new_message = Message.new
   end
 
   def create
@@ -26,10 +23,16 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:message, :receiver_id)
+    params.require(:message).permit(:message, :receiver_id, :sender_id)
   end
 
   def set_message
     @message = Message.find_by(id: params[:id])
+
+  # メッセージが見つからない場合のエラーハンドリング
+    if @message.nil?
+      flash[:alert] = "メッセージが見つかりません。"
+      redirect_to messages_path
+    end
   end
 end
