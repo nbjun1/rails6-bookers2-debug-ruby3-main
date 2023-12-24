@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
 
-  resources :messages, only: [:show, :index, :create, :destroy, :update]
+  resources :messages, only: [:create, :destroy, :update]
+  resources :rooms, only: [:show, :index]
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]
